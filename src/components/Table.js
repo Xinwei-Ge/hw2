@@ -1,7 +1,6 @@
 import React from 'react';
 
 const TableHeader = () => { 
-    // boilerplate table header functional component
     return (
         <thead>
             <tr>
@@ -13,25 +12,32 @@ const TableHeader = () => {
     );
 }
 
-const TableBody = props => { 
-    // boilerplate table body functional component 
-    // we use Array.map to create table rows from LinkData passed via props
-    const rows = props.linkData.map((row, index) => {
+const TableBody = ({linkData, removeLink}) => { 
+
+    const rows = linkData ? linkData.map((row, index) => {
         return (
             <tr key={index}>
                 <td>{row.name}</td>
                 <td><a href={row.URL}>{row.URL}</a></td>
-                <td><button onClick={() => props.removeLink(index)}>Delete</button></td>
+                <td><button onClick={() => removeLink(index)}>Delete</button></td>
             </tr>
         );
-    });
+    }):null;
 
     return <tbody>{rows}</tbody>;
 }
 
 const Table = (props) => {
-//    const { linkData, removeLink } = props;
-    {/*TODO - return <table> component, TableHeader and TableBody  */}
+    const { linkData, removeLink } = props;
+    return (
+    <div>
+
+        <TableHeader/>
+        <TableBody linkData = {linkData}
+        removeLink = {removeLink}/>
+        
+    </div>
+    );
 
 }
 
